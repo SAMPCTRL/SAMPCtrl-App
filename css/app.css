@@ -1,0 +1,172 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+       url(../fonts/MaterialIcons-Regular.woff) format('woff'),
+       url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+@font-face {
+  font-family: 'Framework7 Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Framework7Icons-Regular.eot");
+  src: url("../fonts/Framework7Icons-Regular.woff2") format("woff2"),
+       url("../fonts/Framework7Icons-Regular.woff") format("woff"),
+       url("../fonts/Framework7Icons-Regular.ttf") format("truetype");
+}
+
+.f7-icons {
+  font-family: 'Framework7 Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 25px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  text-align: center;
+}
+
+.demo-list-icon, .icon-f7 {
+  background: #ccc;
+  display: block;
+  position: relative;
+}
+.theme-dark .demo-list-icon {
+  background-color: #555;
+}
+.icon-f7 {
+  background: url(../img/f7-icon.png) no-repeat center;
+  background-size: cover;
+}
+.icon-vi {
+  background: url(../img/vi-icon.png) no-repeat center;
+  background-size: cover;
+}
+
+.ios .demo-list-icon, .ios .icon-f7, .ios .icon-vi {
+  width: 29px;
+  height: 29px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+.md .demo-list-icon, .md .icon-f7, .md .icon-vi {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+}
+
+/* Lazy Demo */
+img.demo-lazy {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+div.demo-lazy {
+  background: #aaa;
+  -webkit-background-size: cover;
+  background-size: cover;
+  height: 300px;
+  height: 60vw;
+}
+
+/* Tab Bar */
+.ios .tabbar .tab-link:not(.tab-link-active) .icon-fill {
+  display: none;
+}
+.ios .tabbar .tab-link.tab-link-active .icon:not(.icon-fill) {
+  display: none;
+}
+
+.ios .list {
+  margin: 10px 0 !important;
+}
+
+.md .list {
+  margin: 15px 0 !important;
+}
+
+.weui-footer{color:#999;font-size:14px;text-align:center;margin-bottom: 50px;}.weui-footer_fixed-bottom{margin-bottom: 0;position:fixed;bottom:.52em;left:0;right:0}.weui-footer__links{font-size:0}.weui-footer__link{display:inline-block;vertical-align:top;margin:0 .62em;position:relative;font-size:14px;color:#586c94}.weui-footer__link:before{content:" ";position:absolute;left:0;top:0;width:1px;bottom:0;border-left:1rpx solid #c7c7c7;color:#c7c7c7;left:-.65em;top:.36em;bottom:.36em}.weui-footer__link:first-child:before{display:none}.weui-footer__text{padding:0 .34em;font-size:12px}
+
+
+.logo {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  margin-top: 50px;
+  text-align: center;
+  line-height: 150px;
+}
+
+.name{
+  text-align: center;
+  font-size: 25px;
+  margin-top: 20px;
+}
+
+.version{
+  text-align: center;
+  font-size: 15px;
+  margin-top: 2px;
+}
+
+.logo-image{
+  width: 150px;
+  height: 150px;
+  vertical-align: middle;
+}
+
+.about{
+  font-size: 15px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.about-text{
+  margin-top: 7px;
+  display: block;
+}
+
+.about-text-blank{
+  margin-top: 20px;
+}
