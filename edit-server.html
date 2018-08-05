@@ -1,0 +1,89 @@
+<template>
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">返回</span>
+        </a>
+      </div>
+      <div class="title">编辑</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <form class="list" id="edit-form">
+      <ul>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">名称 *</div>
+            <div class="item-input-wrap">
+              <input name="name" type="text" placeholder="输入服务器名称" value="{{name}}">
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">IP *</div>
+            <div class="item-input-wrap">
+              <input name="ip" type="text" placeholder="输入服务器IP" value="{{ip}}">
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">端口 *</div>
+            <div class="item-input-wrap">
+              <input name="port" type="number" min="1" max="65535" placeholder="输入服务器端口" value="{{port}}">
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">RCON密码</div>
+            <div class="item-input-wrap">
+              <input name="rcon" type="text" placeholder="输入RCON密码（可选）" value="{{rcon}}">
+            </div>
+          </div>
+        </li>
+      </ul>
+	  <div class="block">
+		<button class="col button button-big button-raised button-fill" @click="submit" type="button">添加</button>
+	  </div>
+    </form>
+  </div>
+</div>
+</template>
+<script>
+  return {
+    data: function () {
+	  var theserver = server.getServer(server.getCurID());
+	  return {
+		 name: theserver.name,
+		 ip: theserver.ip,
+		 port: theserver.port,
+		 rcon: theserver.rcon
+	  }
+    },
+    methods: {
+      submit: function (e) {
+	    var name = Dom7("#edit-form input[name=name]").val();
+		var addr = Dom7("#edit-form input[name=ip]").val();
+		var port = Dom7("#edit-form input[name=port]").val();
+		var rcon = Dom7("#edit-form input[name=rcon]").val();
+		if(name == "" || addr == "" | port == "")
+		{
+			ui.showToast("请完成表单后再试");
+			return;
+		}
+		if(port < 1 || port > 66535)
+		{
+			ui.showToast("端口输入错误");
+			return;
+		}
+		server.editServer(server.getCurID(), name, addr, port, rcon);
+		mainView.router.back();
+      }
+    }
+  }
+</script>

@@ -1,0 +1,45 @@
+<template>
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">返回</span>
+        </a>
+      </div>
+      <div class="title">服务器</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="list">
+      <ul>
+		{{#each items}}
+        <a @click="select" class="item-content item-link" data-id="{{@key}}">
+          <div class="item-inner">
+            <div class="item-title">{{name}}</div>
+          </div>
+        </a>
+		{{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+</template>
+<script>
+  return {
+    data: function () {
+	  var servers = server.getServers();
+	  return {
+		 items: utils.toObject(servers)
+	  }
+    },
+    methods: {
+      select: function (e) {
+        var id = Dom7(e.target).parents('.item-link').attr('data-id');
+		ui.selectServer(id);
+		mainView.router.back();
+      }
+    }
+  }
+</script>

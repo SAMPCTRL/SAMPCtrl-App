@@ -170,3 +170,7 @@ div.demo-lazy {
 .about-text-blank{
   margin-top: 20px;
 }
+
+.pt-10{
+  padding-top: 10px!important;
+}

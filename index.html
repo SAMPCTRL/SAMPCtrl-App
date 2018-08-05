@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#F7F7F8">
     <title>SAMPCTRL</title>
-    <link rel="stylesheet" href="css/framework7.md.min.css">
+    <link rel="stylesheet" href="css/framework7.min.css">
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
@@ -32,10 +32,15 @@
 				<a href="#tab-4" class="tab-link">聊天</a>
 			  </div>
 			</div>
+		  <div class="toolbar messagebar toolbar-bottom-md display-none">
+			<div class="toolbar-inner">
+			  <div class="messagebar-area">
+				<textarea class="resizable" placeholder="输入指令或消息..."></textarea>
+			  </div><a class="link send-link" href="#">发送</a>
+			</div>
+		  </div>
 			<div class="tabs">
 			  <div id="tab-1" class="page-content tab tab-active">
-				<div class="block">
-				</div>
 			  </div>
 			  <div id="tab-2" class="page-content tab">
 				<div class="block">
@@ -48,24 +53,28 @@
 				</div>
 			  </div>
 			  <div id="tab-3" class="page-content tab">
-				<div class="block">
-				  <p><b>Tab {{this}} content</b></p>
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corrupti, quos asperiores unde aspernatur illum odio, eveniet. Fugiat magnam perspiciatis ex dignissimos, rerum modi ea nesciunt praesentium iusto optio rem?</p>
-				  <p>Illo debitis et recusandae, ipsum nisi nostrum vero delectus quasi. Quasi, consequatur! Corrupti, explicabo maxime incidunt fugit sint dicta saepe officiis sed expedita, minima porro! Ipsa dolores quia, delectus labore!</p>
-				  <p>At similique minima placeat magni molestias sunt deleniti repudiandae voluptatibus magnam quam esse reprehenderit dolor enim qui sed alias, laboriosam quaerat laborum iure repellat praesentium pariatur dolorum possimus veniam! Consectetur.</p>
-				  <p>Sunt, sed, magnam! Qui, suscipit. Beatae cum ullam necessitatibus eligendi, culpa rem excepturi consequatur quidem totam eum voluptates nihil, enim pariatur incidunt corporis sed facere magni earum tenetur rerum ea.</p>
-				  <p>Veniam nulla quis molestias voluptatem inventore consectetur iusto voluptatibus perferendis quisquam, cupiditate voluptates, tenetur vero magnam nisi animi praesentium atque adipisci optio quod aliquid vel delectus ad? Dicta deleniti, recusandae.</p>
-				</div>
 			  </div>
 			  <div id="tab-4" class="page-content tab">
-				<div class="block">
-				  <p><b>Tab {{this}} content</b></p>
-				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corrupti, quos asperiores unde aspernatur illum odio, eveniet. Fugiat magnam perspiciatis ex dignissimos, rerum modi ea nesciunt praesentium iusto optio rem?</p>
-				  <p>Illo debitis et recusandae, ipsum nisi nostrum vero delectus quasi. Quasi, consequatur! Corrupti, explicabo maxime incidunt fugit sint dicta saepe officiis sed expedita, minima porro! Ipsa dolores quia, delectus labore!</p>
-				  <p>At similique minima placeat magni molestias sunt deleniti repudiandae voluptatibus magnam quam esse reprehenderit dolor enim qui sed alias, laboriosam quaerat laborum iure repellat praesentium pariatur dolorum possimus veniam! Consectetur.</p>
-				  <p>Sunt, sed, magnam! Qui, suscipit. Beatae cum ullam necessitatibus eligendi, culpa rem excepturi consequatur quidem totam eum voluptates nihil, enim pariatur incidunt corporis sed facere magni earum tenetur rerum ea.</p>
-				  <p>Veniam nulla quis molestias voluptatem inventore consectetur iusto voluptatibus perferendis quisquam, cupiditate voluptates, tenetur vero magnam nisi animi praesentium atque adipisci optio quod aliquid vel delectus ad? Dicta deleniti, recusandae.</p>
-				</div>
+				  <div class="page-content messages-content pt-10">
+					<div class="messages">
+					  <div class="messages-title">10:24</div>
+					  <div class="message message-sent">
+						<div class="message-content">
+						  <div class="message-bubble">
+							<div class="message-text">/rcon say 傻屌！</div>
+						  </div>
+						</div>
+					  </div>
+					  <div class="message message-received">
+						<div class="message-content">
+						  <div class="message-name">RCON</div>
+						  <div class="message-bubble">
+							<div class="message-text">指令发送成功！</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
 			  </div>
 			</div>
 		  <div class="popover popover-menu">
@@ -76,7 +85,7 @@
 				  <li><a href="/servers/" class="list-button item-link popover-close">服务器</a></li>
 				  <li><a href="/add-server/" class="list-button item-link popover-close">添加</a></li>
 				  <li><a href="/edit-server/" class="list-button item-link popover-close">编辑</a></li>
-				  <li><a href="/del-server/" class="list-button item-link popover-close">删除</a></li>
+				  <li><a href="javascript:ui.deleteServer();void(0);" class="list-button item-link popover-close">删除</a></li>
 				  <li><a href="/about/" class="list-button item-link popover-close">关于</a></li>
 				  <li><a href="/feedback/" class="list-button item-link popover-close">反馈</a></li>
 				</ul>
@@ -86,6 +95,104 @@
 		  </div>
       </div>
     </div>
+	<script id="loadfail-template" type="text/template7">
+		<div class="block block-strong text-align-center">
+		  <p>{{errmsg}}</p>
+		</div>
+	</script>
+	<script id="loading-template" type="text/template7">
+		<div class="block block-strong text-align-center">
+			<div class="preloader color-multi">
+				<span class="preloader-inner">
+				<span class="preloader-inner-gap"></span>
+					<span class="preloader-inner-left">
+						<span class="preloader-inner-half-circle"></span>
+					</span>
+					<span class="preloader-inner-right">
+						<span class="preloader-inner-half-circle"></span>
+					</span>
+				</span>
+			</div>
+		</div>
+	</script>
+	<script id="tab-3-template" type="text/template7">
+		<div class="list links-list">
+		  <ul>
+			{{#each data}}
+				<li>
+				  <a href="javascript:ui.showPlayerInfo({{ID}},'{{Name}}','{{Score}}','{{Ping}}');">[{{ID}}] {{Name}}</a>
+				</li>
+			{{/each}}
+		  </ul>
+		</div>
+	</script>
+	<script id="tab-1-template" type="text/template7">
+		<div class="list media-list">
+			<ul>
+			<li>
+			  <div class="item-content">
+				<div class="item-inner">
+				  <div class="item-title-row">
+					<div class="item-title">服务器名</div>
+				  </div>
+				  <div class="item-subtitle">{{data['name']}}</div>
+				</div>
+			  </div>
+			</li>
+			<li>
+			  <div class="item-content">
+				<div class="item-inner">
+				  <div class="item-title-row">
+					<div class="item-title">IP</div>
+				  </div>
+				  <div class="item-subtitle">{{data['addr']}}</div>
+				</div>
+			  </div>
+			</li>
+			<li>
+			  <div class="item-content">
+				<div class="item-inner">
+				  <div class="item-title-row">
+					<div class="item-title">需要密码</div>
+				  </div>
+				  <div class="item-subtitle">{{data['password']}}</</div>
+				</div>
+			  </div>
+			</li>
+			<li>
+			  <div class="item-content">
+				<div class="item-inner">
+				  <div class="item-title-row">
+					<div class="item-title">玩家</div>
+				  </div>
+				  <div class="item-subtitle">{{data['players']}} / {{data['maxplayers']}}</div>
+				</div>
+			  </div>
+			</li>
+			<li>
+			  <div class="item-content">
+				<div class="item-inner">
+				  <div class="item-title-row">
+					<div class="item-title">模式</div>
+				  </div>
+				  <div class="item-subtitle">{{data['mode']}}</div>
+				</div>
+			  </div>
+			</li>
+			<li>
+			  <div class="item-content">
+				<div class="item-inner">
+				  <div class="item-title-row">
+					<div class="item-title">语言</div>
+				  </div>
+				  <div class="item-subtitle">{{data['language']}}</div>
+				</div>
+			  </div>
+			</li>
+			</ul>
+		</div>
+	</script>
+	<script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" src="js/framework7.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
   </body>
