@@ -1,13 +1,14 @@
+<template>
 <div class="page">
   <div class="navbar">
     <div class="navbar-inner sliding">
       <div class="left">
         <a href="#" class="link back">
           <i class="icon icon-back"></i>
-          <span class="ios-only">返回</span>
+          <span class="ios-only">{{LAN['back']}}</span>
         </a>
       </div>
-      <div class="title">关于</div>
+      <div class="title">{{LAN['about']}}</div>
     </div>
   </div>
   <div class="page-content">
@@ -20,18 +21,64 @@
 		  SAMPCTRL
 		</div>
 		<div class="version">
-		  1.0 Alpha
+			{{version.version}} (Build: {{version.build}})<br/>{{version.release}}
 		</div>
 		<div class="about">
-		  <span class="about-text">SA-MP服务器控制系统</span>
+		  <span class="about-text">{{LAN['about-text']}}</span>
 		</div>
 	  </div>
 	</div>
 	  <div class="weui-footer weui-footer_fixed-bottom">
 		<div class="weui-footer__text">
-		  <div>汇诚游戏社区 出品</div>
-		  <div>HC-GAMING.COM</div>
+			<div class="list">
+			  <ul>
+				<li>
+				  <a href="#" class="item-link item-content" @click="checkUpdate">
+					<div class="item-inner">
+					  <div class="item-title">{{LAN['check-update']}}</div>
+					  <div class="item-after">{{version.version}}</div>
+					</div>
+				  </a>
+				</li>
+				<li>
+				  <a href="#" class="item-link item-content">
+					<div class="item-inner">
+					  <div class="item-title">{{LAN['qq-group']}}</div>
+					  <div class="item-after">413883900</div>
+					</div>
+				  </a>
+				</li>
+				<li>
+				  <a href="javascript:ui.viewForum();void(0);" class="item-link item-content">	
+					<div class="item-inner">
+					  <div class="item-title">{{LAN['forums']}}</div>
+					  <div class="item-after">{{LAN['forums-url']}}</div>
+					</div>
+				  </a>
+				</li>
+			  </ul>
+			</div>
+			<div>{{LAN['sec-tips']}}</div>
+			<div>{{LAN['product-by']}}</div>
+			<div>HC-GAMING.COM</div>
 		</div>
 	  </div>
   </div>
 </div>
+</template>
+<script>
+  return {
+    data: function () {
+	  var ver = updateManager.getVersion();
+	  return {
+		 version: ver,
+		 LAN: languageManager.getPack()
+	  }
+    },
+    methods: {
+      checkUpdate: function (e) {
+		updateManager.checkUpdate(true);
+      }
+    }
+  }
+</script>

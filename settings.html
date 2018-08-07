@@ -1,0 +1,74 @@
+<template>
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">{{LAN['back']}}</span>
+        </a>
+      </div>
+      <div class="title">{{LAN['settings']}}</div>
+    </div>
+  </div>
+  <div class="page-content">
+	<div class="list">
+      <ul>
+		<li>
+		  <a class="item-link smart-select smart-select-init" data-open-in="popup">
+			<select name="language">
+			  {{#each languages}}
+				<option value="{{@key}}" {{#js_if "this.@key == @root.curLan"}}selected="selected"{{/js_if}}>{{name}}</option>
+			  {{/each}}
+			</select>
+			<div class="item-content">
+			  <div class="item-inner">
+				<div class="item-title">{{LAN['select-language']}}</div>
+			  </div>
+			</div>
+		  </a>
+		</li>
+		<!--<li>
+		  <a class="item-link smart-select smart-select-init">
+			<select name="encoding">
+			  <option value="">GBK</option>
+			  <option value="">BIG5</option>
+			</select>
+			<div class="item-content">
+			  <div class="item-inner">
+				<div class="item-title">{{LAN['select-encoding']}}</div>
+			  </div>
+			</div>
+		  </a>
+		</li>-->
+      </ul>
+    </div>  
+  </div>
+</div>
+</template>
+<script>
+  return {
+    data: function () {
+	  return {
+		 LAN: languageManager.getPack(),
+		 languages: languageManager.getLanList(),
+		 curLan: languageManager.getLan()
+	  }
+    },
+	on: {
+		pageInit: function (e, page) {
+			Dom7('.smart-select').on('smartselect:close', function (e) {
+				var select = app.smartSelect.get('.smart-select');
+				if(select.$selectEl[0].value != languageManager.getLan())
+				{
+					languageManager.setLan(select.$selectEl[0].value);
+					languageManager.loadPackage();
+					ui.showToast(languageManager.getVar('change-language-tips'));
+					ui.loadPopover();
+					ui.loadToolbar();
+				}
+			});
+		},
+	}
+  }
+</script>

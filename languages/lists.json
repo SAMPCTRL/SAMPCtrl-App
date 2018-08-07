@@ -1,0 +1,14 @@
+{
+	"en": {
+		"name": "English",
+		"file": "en.json"
+	},
+	"zh_Hans": {
+		"name": "简体中文",
+		"file": "zh_Hans.json"
+	},
+	"zh_Hant": {
+		"name": "繁體中文",
+		"file": "zh_Hant.json"
+	}
+}
