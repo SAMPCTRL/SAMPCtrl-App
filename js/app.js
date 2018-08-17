@@ -629,13 +629,6 @@ var tapp = {
 		ui.loadPopover();
 		ui.loadToolbar();
 		ui.loadNightMode();
-		if(navigator.connection.type == "none")
-		{
-			app.dialog.alert(languageManager.getVar("no-network-tips"), function(){
-				navigator.app.exitApp();
-			});
-			return;
-		}
 		updateManager.checkUpdate(false);
 		/*var eula = storage.get("EULA");
 		if(utils.isNull(eula))
@@ -675,6 +668,10 @@ String.prototype.gblen = function() {
 
 sampquery.prototype = {
     send: function (data) {
+		if(navigator.connection.type == "none"){
+			this.errcallback();
+			return;
+		}
 		var that = this;
 		chrome.sockets.udp.create(function(createInfo) {
 	      that.socketId = createInfo.socketId;
