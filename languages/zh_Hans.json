@@ -50,7 +50,7 @@
 	"using-latest-version": "您已经在使用最新版本",
 	"version": "版本",
 	"release-date": "更新日期",
-	"releate-note": "更新内容",
+	"release-note": "更新内容",
 	"new-version-detacted": "软件有新版本",
 	"no-network-tips": "本软件需要网络才能够正常使用，请连接网络后再使用。"
 }

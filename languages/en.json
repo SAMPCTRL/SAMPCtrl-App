@@ -50,7 +50,7 @@
 	"using-latest-version": "You are using the latest version.",
 	"version": "Version",
 	"release-date": "Release Date",
-	"releate-note": "Release Note",
+	"release-note": "Release Note",
 	"new-version-detacted": "New Version Detacted",
 	"no-network-tips": "This application needs network connection, please connect to network first and try again."
 }

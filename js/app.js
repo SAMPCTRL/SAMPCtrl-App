@@ -606,6 +606,7 @@ var updateManager = {
 			url: 'https://sampctrl.gitee.io/version.json',
 			cache: false,
 			success: function (data, status, xhr) {
+				data = JSON.parse(data);
 				var localversion = updateManager.getVersion();
 				if(data.build > localversion.build){
 					app.dialog.confirm(languageManager.getVar('version') + '：' + data.version + "<br/>" + languageManager.getVar('release-date') +"：" + data.release + "<br/>" + languageManager.getVar('release-note') + "：<br/>" + data.note, languageManager.getVar('new-version-detacted'), function () {
