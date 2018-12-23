@@ -626,17 +626,18 @@ var tapp = {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
     onDeviceReady: function() {
-		Transparentstatusbar.init(function(result) {});
 		ui.loadPopover();
 		ui.loadToolbar();
 		ui.loadNightMode();
-		updateManager.checkUpdate(false);
 		/*var eula = storage.get("EULA");
 		if(utils.isNull(eula))
 		{
 			ui.loadEULA();
 		}*/
-		ui.loadServerInfo();
+		setTimeout(function(){
+			ui.loadServerInfo();
+			updateManager.checkUpdate(false);
+		}, 200);
     }
 };
 
