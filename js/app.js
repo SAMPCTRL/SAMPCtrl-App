@@ -529,6 +529,9 @@ var ui = {
 			}
 		}
 	},
+	viewQQGroup: function(){
+		cordova.InAppBrowser.open('mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3DzO9gHl2Dpppd5oinv7zRnGxL7t1NJ8Wn', '_system');
+	},
 	viewForum: function(){
 		cordova.InAppBrowser.open('https://bbs.hc-gaming.com', '_system');
 	},
