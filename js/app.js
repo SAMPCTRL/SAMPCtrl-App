@@ -177,7 +177,6 @@ var server = {
 		svr['ip'] = addr;
 		svr['port'] = port;
 		svr['rcon'] = rcon;
-		console.log(svr);
 		data.push(svr);
 		storage.set("servers",JSON.stringify(data));
 		ui.selectServer(data.length - 1);
@@ -264,7 +263,6 @@ var ui = {
 			app.dialog.alert(languageManager.getVar('please-add-server'));
 			return;
 		}
-		console.log(server);
 		var id = server.getCurID();
     	app.dialog.confirm(languageManager.getVar('delete-server-confirm'), languageManager.getVar('delete'), function () {
     		app.dialog.close();
@@ -335,7 +333,6 @@ var ui = {
 		var svr = server.getServer(id);
 		var q = new sampquery(svr['ip'], svr['port']);
 		q.query("d", function(data){
-			console.log(data);
 			var decode = q.decode("d", data.data);
 			var template = Dom7('#tab-3-template').html();
 			var compiledTemplate = Template7.compile(template);
@@ -679,15 +676,15 @@ sampquery.prototype = {
 		}
 		var that = this;
 		cordova.plugins.dns.resolve(that.ip, function success(address) {
-		chrome.sockets.udp.create(function(createInfo) {
-	      that.socketId = createInfo.socketId;
-		  that.listener = chrome.sockets.udp.onReceive.addListener(function(info){ that.listen(info, that.socketId, that.callback); });
-		  chrome.sockets.udp.bind(createInfo.socketId, '0.0.0.0', 0, function(result) {
-			chrome.sockets.udp.send(createInfo.socketId, data, that.ip, that.port, function(result) {
-			  if (result < 0) that.errcallback();
+			chrome.sockets.udp.create(function(createInfo) {
+			  that.socketId = createInfo.socketId;
+			  that.listener = chrome.sockets.udp.onReceive.addListener(function(info){ that.listen(info, that.socketId, that.callback); });
+			  chrome.sockets.udp.bind(createInfo.socketId, '0.0.0.0', 0, function(result) {
+				chrome.sockets.udp.send(createInfo.socketId, data, that.ip, that.port, function(result) {
+				  if (result < 0) that.errcallback();
+				});
+			  });
 			});
-		  });
-		});
 		},function failure(error) {
 			app.dialog.alert('解析域名失败，请检查服务器设置。错误信息: ' + error);
 		});
@@ -803,20 +800,20 @@ samprcon.prototype = {
     send: function (data, needreply) {
 		var that = this;
 		cordova.plugins.dns.resolve(that.ip, function success(address) {
-		chrome.sockets.udp.create(function(createInfo) {
-	      that.socketId = createInfo.socketId;
-		  if(needreply) that.listener = chrome.sockets.udp.onReceive.addListener(function(info){ that.listen(info, that.socketId, that.repcallback); });
-		  chrome.sockets.udp.bind(createInfo.socketId, '0.0.0.0', 0, function(result) {
-			chrome.sockets.udp.send(createInfo.socketId, data, that.ip, that.port, function(result) {
-			  if (result < 0){
-				  that.errcallback();
-			  }
-			  else {
-				  that.callback();
-			  }
+			chrome.sockets.udp.create(function(createInfo) {
+			  that.socketId = createInfo.socketId;
+			  if(needreply) that.listener = chrome.sockets.udp.onReceive.addListener(function(info){ that.listen(info, that.socketId, that.repcallback); });
+			  chrome.sockets.udp.bind(createInfo.socketId, '0.0.0.0', 0, function(result) {
+				chrome.sockets.udp.send(createInfo.socketId, data, that.ip, that.port, function(result) {
+				  if (result < 0){
+					  that.errcallback();
+				  }
+				  else {
+					  that.callback();
+				  }
+				});
+			  });
 			});
-		  });
-		});
 		},function failure(error) {
 			app.dialog.alert('解析域名失败，请检查服务器设置。错误信息: ' + error);
 		});
