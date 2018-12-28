@@ -675,6 +675,7 @@ sampquery.prototype = {
 			return;
 		}
 		var that = this;
+		cordova.plugins.dns.resolve(that.ip, function success(address) {
 		chrome.sockets.udp.create(function(createInfo) {
 	      that.socketId = createInfo.socketId;
 		  that.listener = chrome.sockets.udp.onReceive.addListener(function(info){ that.listen(info, that.socketId, that.callback); });
@@ -683,6 +684,9 @@ sampquery.prototype = {
 			  if (result < 0) that.errcallback();
 			});
 		  });
+		});
+		},function failure(error) {
+			app.dialog.alert('解析域名失败，请检查服务器设置。错误信息: ' + error);
 		});
     },
 	listen: function (info, socketId, callback) {
@@ -795,6 +799,7 @@ function sampquery(ip, port) {
 samprcon.prototype = {
     send: function (data, needreply) {
 		var that = this;
+		cordova.plugins.dns.resolve(that.ip, function success(address) {
 		chrome.sockets.udp.create(function(createInfo) {
 	      that.socketId = createInfo.socketId;
 		  if(needreply) that.listener = chrome.sockets.udp.onReceive.addListener(function(info){ that.listen(info, that.socketId, that.repcallback); });
@@ -808,6 +813,9 @@ samprcon.prototype = {
 			  }
 			});
 		  });
+		});
+		},function failure(error) {
+			app.dialog.alert('解析域名失败，请检查服务器设置。错误信息: ' + error);
 		});
     },
 	listen: function (info, socketId, callback) {
